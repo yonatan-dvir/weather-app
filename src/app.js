@@ -33,7 +33,7 @@ app.use(express.static(publicDirPath));
 // Render the index view when accesing to root route
 app.get("", (req, res) => {
   res.render("index", {
-    title: "Home Page - Weather App",
+    title: "Weather",
     name: "Yonatan Dvir",
   });
 });
