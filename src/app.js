@@ -31,6 +31,22 @@ app.get("", (req, res) => {
   });
 });
 
+// Render the about view when accesing to about route
+app.get("/about", (req, res) => {
+  res.render("about", {
+    title: "About Me",
+    name: "Yonatan Dvir",
+  });
+});
+
+// Render the help view when accesing to help route
+app.get("/help", (req, res) => {
+  res.render("help", {
+    title: "Help",
+    helpText: "This is some helpful text...",
+  });
+});
+
 app.listen(3000, () => {
   console.log("Server is up on port 3000...");
 });
