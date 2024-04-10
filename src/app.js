@@ -1,6 +1,7 @@
 // node cores modules
 const path = require("path");
 // npm modules
+const hbs = require("hbs");
 const request = require("request");
 const express = require("express");
 
@@ -19,10 +20,12 @@ const app = express();
 // Define paths for Express config
 const publicDirPath = path.join(__dirname, "../public");
 const viewsPath = path.join(__dirname, "../templates/views");
+const partialsPath = path.join(__dirname, "../templates/partials");
 
-// Set up handlebars (hbs) engine and views location
+// Set up handlebars (hbs) engine, views location, hbs partials location
 app.set("view engine", "hbs");
 app.set("views", viewsPath);
+hbs.registerPartials(partialsPath);
 
 // Set up static directory to serve
 app.use(express.static(publicDirPath));
