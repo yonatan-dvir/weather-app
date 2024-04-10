@@ -16,12 +16,16 @@ const express = require("express");
 
 const app = express();
 
-// Make the server serve up the public directory
+// Define paths for Express config
 const publicDirPath = path.join(__dirname, "../public");
-app.use(express.static(publicDirPath));
+const viewsPath = path.join(__dirname, "../templates/views");
 
-// Setting hbs to be the view template engine
+// Set up handlebars (hbs) engine and views location
 app.set("view engine", "hbs");
+app.set("views", viewsPath);
+
+// Set up static directory to serve
+app.use(express.static(publicDirPath));
 
 // Render the index view when accesing to root route
 app.get("", (req, res) => {
