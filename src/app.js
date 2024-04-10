@@ -55,6 +55,15 @@ app.get("/help", (req, res) => {
   });
 });
 
+// Render the help view when accesing to help route
+app.get("*", (req, res) => {
+  res.render("404", {
+    title: "404 Page",
+    errorMessage: "Page not found!",
+    name: "Yonatan Dvir",
+  });
+});
+
 app.listen(3000, () => {
   console.log("Server is up on port 3000...");
 });
