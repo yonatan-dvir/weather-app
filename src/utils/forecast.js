@@ -2,6 +2,7 @@ const request = require("request");
 
 const FORECAST_KEY = "c53dce3000c68a411951788245d6c1d9";
 
+// Returns a forecast of the given geo coordinates
 const forecast = (geoCoordinates, callback) => {
   const weatherURL = `http://api.weatherstack.com/current?access_key=${FORECAST_KEY}&query=${geoCoordinates}`;
   let weatherMessage = "t";

@@ -4,17 +4,11 @@ const path = require("path");
 const hbs = require("hbs");
 const request = require("request");
 const express = require("express");
+// Our own modules
+const geocode = require("./utils/geocode.js");
+const forecast = require("./utils/forecast.js");
 
-// const geocode = require("./utils/geocode.js");
-// const forecast = require("./utils/forecast.js");
-
-// geocode("boston", (error, data) => {
-//   error ? console.log(error) : console.log(data);
-//   forecast(data, (error, data) => {
-//     error ? console.log(error) : console.log(data);
-//   });
-// });
-
+// Generate an app using Express
 const app = express();
 
 // Define paths for Express config
@@ -35,6 +29,34 @@ app.get("", (req, res) => {
   res.render("index", {
     title: "Weather",
     name: "Yonatan Dvir",
+  });
+});
+
+app.get("/weather", (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      error: "You must provide an address!",
+    });
+  }
+  geocode(req.query.address, (geoErrorMessage, geoData) => {
+    if (geoErrorMessage) {
+      console.log(geoErrorMessage);
+      return res.send({
+        error: geoErrorMessage,
+      });
+    }
+    forecast(geoData, (forecastErrorMessage, forecastMessage) => {
+      if (forecastErrorMessage) {
+        console.log(forecastErrorMessage);
+        return res.send({
+          error: forecastErrorMessage,
+        });
+      }
+      res.send({
+        forecast: forecastMessage,
+        address: req.query.address,
+      });
+    });
   });
 });
 

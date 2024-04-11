@@ -3,6 +3,7 @@ const request = require("request");
 const GEO_KEY =
   "pk.eyJ1IjoieW9uYXRhbmR2aXIiLCJhIjoiY2xwbmF4a3NkMGo5dDJtdDN1dzVuaDY1OSJ9.yD9BaMV_sDYa1C-PtrVTmw";
 
+// Return the geocode of the given address
 const geocode = (address, callback) => {
   const geoURL = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
     address
